@@ -20,6 +20,9 @@ source .venv/bin/activate
 ```bash
 # Scraping data
 pip install scrapy
+
+# Transforming data
+pip install pandas
 ```
 
 ## Extract
@@ -29,4 +32,13 @@ pip install scrapy
 # /etl-mlivre/src/
 
 scrapy crawl mercadolivre -o ../data/data-mlivre.jsonl
+```
+
+## Transform
+### Data handling
+```bash
+# Cleaning data and saving it to a SQLite database.
+# /etl-mlivre/src/
+
+python3 transform/main.py
 ```
