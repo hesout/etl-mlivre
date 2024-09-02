@@ -23,7 +23,7 @@ class MercadolivreSpider(scrapy.Spider):
                 'old_price_real': prices[0] if len(prices) > 2 else None,
                 'old_price_cent': cents[0] if len(cents) > 2 else None,
                 'new_price_real': prices[1] if len(prices) > 2 else prices[0],
-                'new_price_cents': cents[1] if len(cents) > 2 else None,
+                'new_price_cent': cents[1] if len(cents) > 2 else None,
                 'review_score': product.css('span.ui-search-reviews__rating-number::text').get(),
                 'review_amount': product.css('span.ui-search-reviews__amount::text').get(),
             }
