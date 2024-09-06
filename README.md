@@ -23,6 +23,9 @@ pip install scrapy
 
 # Transforming data
 pip install pandas
+
+# Visualizing data
+pip intall streamlit
 ```
 
 ## Extract
@@ -41,4 +44,13 @@ scrapy crawl mercadolivre -o ../data/data-mlivre.jsonl
 # /etl-mlivre/src/
 
 python3 transform/main.py
+```
+
+## Visualize
+### Dashboard
+```bash
+# Visualizing data in a web page.
+# /etl-mlivre/src/
+
+streamlit run dashboard/app.py
 ```
