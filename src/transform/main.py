@@ -4,7 +4,7 @@ import sqlite3
 from datetime import datetime
 
 # define dataframe w/ JSONL file path
-df = pd.read_json('../data/data-mlivre.jsonl', lines=True)
+df = pd.read_json('../data/data-mlivre.jsonl', lines=True, dtype=False)
 
 # add column _source w/ fixed value
 df['_source'] = "https://lista.mercadolivre.com.br/tenis-masculino"
@@ -13,15 +13,20 @@ df['_source'] = "https://lista.mercadolivre.com.br/tenis-masculino"
 df['_date'] = datetime.now()
 
 ## Data Cleaning
+# removing '.' for prices > 1000
+df['old_price_real'] = df['old_price_real'].str.replace('[\.]', '', regex=True)
+df['new_price_real'] = df['new_price_real'].str.replace('[\.]', '', regex=True)
+
+
+# removing 'review_amount' parentesis
+df['review_amount'] = df['review_amount'].str.replace('[\(\)]', '', regex=True)
+
 # treat null values and numerical data
 df['old_price_real']  = df['old_price_real'].fillna(0).astype(float)
 df['old_price_cent']  = df['old_price_cent'].fillna(0).astype(float)
 df['new_price_real']  = df['new_price_real'].fillna(0).astype(float)
 df['new_price_cent']  = df['new_price_cent'].fillna(0).astype(float)
 df['review_score']  = df['review_score'].fillna(0).astype(float)
-
-# treat review amount values : removing parentesis + treat null values and numerical data
-df['review_amount'] = df['review_amount'].str.replace('[\(\)]', '', regex=True)
 df['review_amount'] = df['review_amount'].fillna(0).astype(int)
 
 # Calculate total price values
